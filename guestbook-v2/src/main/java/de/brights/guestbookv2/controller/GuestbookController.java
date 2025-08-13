@@ -1,7 +1,9 @@
 package de.brights.guestbookv2.controller;
 
 
+import de.brights.guestbookv2.model.Comment;
 import de.brights.guestbookv2.model.GuestBookEntry;
+import de.brights.guestbookv2.service.CommentService;
 import de.brights.guestbookv2.service.GuestBookService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +18,10 @@ import java.util.List;
 public class GuestbookController {
 
     private final GuestBookService guestBookService;
+    private final CommentService commentService;
 
-    public GuestbookController(GuestBookService guestBookService) {
+    public GuestbookController(GuestBookService guestBookService,  CommentService commentService) {
+        this.commentService = commentService;
         this.guestBookService = guestBookService;
     }
 
@@ -53,6 +57,12 @@ public class GuestbookController {
         }
 
         return  ResponseEntity.ok(greeting + ", " + entry.getName() + "! Danke für deinen Eintrag.");
+    }
 
+    @PostMapping("/guestbook/{id}/comments")
+    public ResponseEntity<String> addComment(@PathVariable Long id,
+                                             @Valid @RequestBody Comment comment) {
+        commentService.addComment(id, comment.getAuthor(), comment.getText());
+        return ResponseEntity.ok("Kommentar hinzugefügt!");
     }
 }

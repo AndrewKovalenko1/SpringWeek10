@@ -1,10 +1,8 @@
 package de.brights.guestbookv2.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -13,9 +11,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 public class GuestBookEntry {
 
@@ -25,9 +26,13 @@ public class GuestBookEntry {
 
     @NotBlank(message = "Please write a name!")
     private String name;
-    @Size(min = 5, message = "Message must be minimum 5 symbols lang")
+    @NotBlank(message = "Please write a message")
     private String message;
     private LocalDateTime date;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "guestBookEntry", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<Comment> comments = new HashSet<>();
 
 
     public GuestBookEntry(String name, String message, LocalDateTime date) {
