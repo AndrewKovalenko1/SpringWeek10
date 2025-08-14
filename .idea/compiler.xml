@@ -9,20 +9,21 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.m2/repository/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+          <entry name="$USER_HOME$/.m2/repository/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
         </processorPath>
         <module name="GreetMe" />
         <module name="guestbook-v2" />
         <module name="Guestbook" />
+        <module name="validation" />
       </profile>
-      <profile name="Annotation profile for validation" enabled="true">
+      <profile name="Annotation profile for pet-passport" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.m2/repository/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
-          <entry name="$USER_HOME$/.m2/repository/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
         </processorPath>
-        <module name="validation" />
+        <module name="pet-passport" />
       </profile>
     </annotationProcessing>
   </component>
@@ -31,6 +32,7 @@
       <module name="GreetMe" options="-parameters" />
       <module name="Guestbook" options="-parameters" />
       <module name="guestbook-v2" options="-parameters" />
+      <module name="pet-passport" options="-parameters" />
       <module name="validation" options="-parameters" />
     </option>
   </component>
